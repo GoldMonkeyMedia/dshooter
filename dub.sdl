@@ -1,0 +1,15 @@
+//#!MCVM dub -v run
+name "dshooter"
+description "A minimal D application."
+authors "mcvm"
+copyright "Copyright © 2024, mcvm"
+license "proprietary"
+// platform "wasm32-unknown-emscripten"
+
+dflags "-mtriple=wasm32-unknown-emscripten --mattr=+simd128,+exception-handling "
+
+// lflags "-ld_classic"
+// platform="osx-x86_64"
+
+//-mtriple=wasm32-unknown-emscripten
+// --mattr=+simd128,+exception-handling 
