@@ -8,21 +8,30 @@
       "type": "lldb-dap",
       "request": "launch",
       "name": "Launch LLDB DAP",
-      "program": "${workspaceRoot}/build/npptool",
-      "args": [
-          
-      ],
+      "program": "${workspaceRoot}/build/aa",
+      "args": [],
       "env": [],
       "cwd": "${workspaceRoot}",
       "displayExtendedBacktrace": true,
       "enableAutoVariableSummaries": true,
+      "preLaunchTask": "build",
+      "initCommands": [
+        "command script import \"lldb_d.py\""
+      ]
     },
-    // {
-    //   "type": "code-d",
-    //   "request": "launch",
-    //   "name": "Debug D project",
-    //   "cwd": "${workspaceFolder}",
-    //   "program": "./executableBinaryName"
-    // }
+    {
+      "type": "code-d",
+      "request": "launch",
+      "dubBuild": false,
+      "debugger": "lldb",
+      "name": "Debug D project",
+      "cwd": "${workspaceFolder}",
+      "program": "${workspaceRoot}/build/aa",
+      "config": {
+        "initCommands": [
+          "command script import \"lldb_d.py\""
+        ],
+      },
+    }
   ]
 }

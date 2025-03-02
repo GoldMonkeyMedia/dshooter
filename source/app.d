@@ -1,6 +1,9 @@
-//#!MCVM ldc2 -g --vgc --gcc=clang --link-defaultlib-debug --run ${file}
+//#!MCVM ldc2 -g --vgc --gcc=clang --link-defaultlib-debug --od=build --of=build/aa ${file} --run 
+
 
 //#!MCVM ldc2 -v --output-mlir ${file}
+
+
 
 //#!MCVM ldc2 -v -preview=bitfields -defaultlib=phobos2-ldc,druntime-ldc ${file} -mtriple=wasm32-unknown-emscripten --mattr=+simd128,+exception-handling \
 //#!MCVM -L--no-entry
@@ -35,7 +38,7 @@ void writeln(T...)(T args) {
 }
 
 struct Foo {
-    int x;
+    int xxxvar;
 }
 
 struct Owned(T) {
@@ -93,29 +96,29 @@ class CLclcl {
 void fn() {
     { // Simulate scope
         auto foo = Owned!Foo(malloc(Foo.sizeof));
-        foo.x = 10;
-        assert(foo.x == 10);
-        writeln(foo.x);
+        foo.xxxvar = 10;
+        assert(foo.xxxvar == 10);
+        writeln(foo.xxxvar);
     }
 
     { // Simulate scope
         auto foo = Owned!Foo.malloc;
-        foo.x = 100;
-        assert(foo.x == 100);
-        writeln(foo.x);
+        foo.xxxvar = 100;
+        assert(foo.xxxvar == 100);
+        writeln(foo.xxxvar);
     }
 
-    auto a = "a" ~ "b";
+    auto a_var = "a" ~ "b";
     for (int i = 0; i < 10; i++) {
         writeln(i);
-        a ~= "cc";
+        a_var ~= "cc";
     }
-    auto x = new int;
+    auto a_x_var = new int;
 
-    typeof(x).stringof.writeln;
+    typeof(a_x_var).stringof.writeln;
     // GC.free(x);
-    __delete(x);
-    auto st = new Strr;
+    __delete(a_x_var);
+    auto stack_strr = new Strr;
     auto stt_inst = Strr();
 
     auto cl_inst = new CLclcl();
@@ -147,7 +150,9 @@ void fn() {
     __traits(classInstanceSize, CLclcl).writeln;
     CLclcl.sizeof.writeln;
 
-    writeln(a);
+    GC.collect();
+
+    writeln(a_var);
 }
 
 void main() {

@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "process",
+      "command": "ldc2",
+      "args": [
+        "-v",
+        // "--vv",
+        "--print-all-options",
+        // "-g",
+        "--gdwarf",
+        "--gc",
+        "--live-debug-variables",
+        "--vgc",
+        "--gcc=clang",
+        "--debugger-tune=lldb",
+        "--link-defaultlib-debug",
+        "--od=build",
+        "--of=build/aa",
+        "--llvm-color",
+        "--unittest",
+        "${file}",
+      ],
+      "problemMatcher": [
+        "$dmd"
+      ],
+      "presentation": {
+        "reveal": "always",
+      },
+      "runOptions": {},
+      "options": {},
+      "isBuildCommand": true,
+      "group": "build",
+      
+    }
+  ]
+}
